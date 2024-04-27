@@ -30,7 +30,7 @@ public partial class BookStoreDbContext : IdentityDbContext<ApiUser>
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
+        base.OnModelCreating(modelBuilder); //customizing how the model for your database context is created, any default behaviour defined in the base 'DbContext' class is also applied before adding your own customizations 
         modelBuilder.Entity<Author>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Authors__3214EC0782CD9FA9");
@@ -68,13 +68,13 @@ public partial class BookStoreDbContext : IdentityDbContext<ApiUser>
                 },
                 new IdentityRole
                 {
-                    Name = "Admin",
+                    Name = "Administrator",
                     NormalizedName = "ADMINISTRATOR",
                     Id = "b7617023-bd2e-45f6-bb09-cee969f6f456"
                 }
             );
 
-        var hasher = new PasswordHasher<ApiUser>();
+        var hasher = new PasswordHasher<ApiUser>(); // identity assignes hash passwords to the table. This is allowing password hashing 
         modelBuilder.Entity<ApiUser>().HasData(
             new ApiUser
             {
@@ -105,11 +105,13 @@ public partial class BookStoreDbContext : IdentityDbContext<ApiUser>
             {
                 RoleId = "85b56d87-6af5-4900-b3d1-e902da6f0316",
                 UserId = "e94a3f42-0068-4564-ae6e-ecc4e344a988"
+                // assigning user id to role id 
             },
             new IdentityUserRole<string>
             {
                 RoleId = "b7617023-bd2e-45f6-bb09-cee969f6f456",
                 UserId = "c2ff4ddd-1c99-4fd6-9af0-7d5b6dd591fc",
+                // assigning user id to role id 
             }
         );
 

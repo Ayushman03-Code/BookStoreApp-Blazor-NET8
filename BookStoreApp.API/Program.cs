@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.Extensions.DependencyInjection;
 
 internal class Program
 {
@@ -19,6 +20,8 @@ internal class Program
         var connString = builder.Configuration.GetConnectionString("BookStoreAppDbConnection"); // this tells look in the appsettings.json ->(.Configuration object) and GetConnectionString("") by that name
         builder.Services.AddDbContext<BookStoreDbContext>(options => options.UseSqlServer(connString));
         builder.Services.AddIdentityCore<ApiUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<BookStoreDbContext>(); // added service for Identity.EFC for API authentication
+
+        //builder.Services.AddIdentity
 
         builder.Services.AddAutoMapper(typeof(MapperConfig));
 
