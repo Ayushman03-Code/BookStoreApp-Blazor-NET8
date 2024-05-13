@@ -24,6 +24,7 @@ namespace BookStoreApp.API.Controllers
 
         [HttpPost] // when getting user registration data you usually use httppost when you are accepting data
         [Route("register")]// you can also specify a route route here is register
+        [AllowAnonymous]
         public async Task<IActionResult> Register(UserDto userDto)
         {
             //if (userDto == null)
